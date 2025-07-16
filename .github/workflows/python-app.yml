@@ -32,3 +32,4 @@ jobs:
         PYTHONPATH: .
       run: |
         pytest tests/
+# Trigger re-run
