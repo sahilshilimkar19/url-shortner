@@ -1,17 +1,31 @@
-# URL Shortener
+# 🔗 URL Shortener (Flask-based)
 
-A simple URL shortener web app built with Flask and SQLite.
+A lightweight URL shortener inspired by TinyURL.  
+Built with Flask, SQLite, and raw HTML/CSS — no ORMs or frontend frameworks.
 
-## Features
-- Anonymous URL shortening (in progress)
-- Custom short links for logged-in users (coming soon)
+---
 
-## Setup Instructions
+## 🚀 Features
 
+- ✅ Anonymous users can create short URLs
+- ✅ Registered users can:
+  - Log in / Sign up
+  - Create custom short codes
+  - View their own URLs via dashboard
+- ✅ All data stored in SQLite (no ORM used)
+- ✅ Clean HTML/CSS UI without frameworks
+
+---
+
+## 🧪 Testing
+
+Unit tests are included for:
+- Homepage loading
+- Anonymous URL shortening
+- User registration and login
+- Custom short code creation
+- Redirection logic
+
+Run tests locally with:
 ```bash
-git clone https://github.com/yourusername/url-shortener.git
-cd url-shortener
-python -m venv venv
-source venv/bin/activate  # on Windows: venv\Scripts\activate
-pip install -r requirements.txt
-python run.py
+python -m unittest discover tests
