@@ -1,14 +1,26 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
     <title>URL Shortener</title>
     <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
     <div class="container">
-        <h1>Welcome to URL Shortener</h1>
-        <p>Shorten your URL quickly and easily.</p>
+        <h1>Shorten Your URL</h1>
+        <form method="POST">
+            <input type="url" name="original_url" placeholder="Enter your URL here" required>
+            <button type="submit">Shorten</button>
+        </form>
+
+        {% with messages = get_flashed_messages() %}
+          {% if messages %}
+            <div class="flash">
+              {% for msg in messages %}
+                <p>{{ msg }}</p>
+              {% endfor %}
+            </div>
+          {% endif %}
+        {% endwith %}
     </div>
 </body>
 </html>
