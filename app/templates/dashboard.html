@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Your Dashboard</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome, {{ session.username }}</h1>
+
+        {% with messages = get_flashed_messages() %}
+          {% if messages %}
+            <div class="flash">
+              {% for msg in messages %}
+                <p>{{ msg }}</p>
+              {% endfor %}
+            </div>
+          {% endif %}
+        {% endwith %}
+
+        <p><a href="/">← Back to Home</a> | <a href="/logout">Logout</a></p>
+
+        <h2>Your Shortened URLs</h2>
+
+        {% if urls %}
+            <table>
+                <thead>
+                    <tr>
+                        <th>Short Code</th>
+                        <th>Original URL</th>
+                        <th>Created At</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for url in urls %}
+                        <tr>
+                            <td><a href="{{ request.host_url }}{{ url.short_code }}" target="_blank">{{ url.short_code }}</a></td>
+                            <td>{{ url.original_url }}</td>
+                            <td>{{ url.created_at }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p>You haven’t shortened any URLs yet.</p>
+        {% endif %}
+    </div>
+</body>
+</html>
