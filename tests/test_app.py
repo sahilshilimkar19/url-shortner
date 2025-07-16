@@ -1,6 +1,7 @@
 import unittest
 import tempfile
 import os
+import uuid
 from app.main import app
 from app.db import get_db_connection, init_db
 
@@ -56,16 +57,19 @@ class URLShortenerTestCase(unittest.TestCase):
             'password': 'testpass'
         })
 
+        # Generate unique short code
+        custom_code = f"test{uuid.uuid4().hex[:6]}"
+
         # Shorten URL with custom code
         response = self.client.post('/', data={
             'original_url': 'http://custom.com',
-            'custom_code': 'custom123'
+            'custom_code': custom_code
         }, follow_redirects=True)
 
         self.assertIn(b'Short URL: http://', response.data)
 
         # Visit short URL
-        redirect_response = self.client.get('/custom123', follow_redirects=False)
+        redirect_response = self.client.get(f'/{custom_code}', follow_redirects=False)
         self.assertEqual(redirect_response.status_code, 302)
         self.assertIn('http://custom.com', redirect_response.location)
 
